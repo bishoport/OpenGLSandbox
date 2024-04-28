@@ -14,17 +14,14 @@ public:
 	void Init();
 
 private:
-    Ref<Texture> diffuse1;
-    Ref<Texture> diffuse2;
-
-    Ref<Mesh> testMesh1;
-    Ref<Mesh> testMesh2;
-
+  
+    Ref<Scene> currentScene;
     libCore::ShaderManager shaderManager;
     libCore::FreeTypeManager* freeTypeManager = nullptr;
+    libCore::Camera* m_camera = nullptr;
+
     float lastFrameTime = 0.0f;
 
-    libCore::Camera* m_camera = nullptr;
     void LoopOpenGL(libCore::Timestep deltaTime);
     void OnCloseOpenGL();
     void LoopImGUI();

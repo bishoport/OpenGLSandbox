@@ -133,7 +133,9 @@
     <ClCompile Include="src\ActorSystem\Actor.cpp" />
     <ClCompile Include="src\ActorSystem\ActorComponent.cpp" />
     <ClCompile Include="src\ActorSystem\Components\ColliderComponent.cpp" />
+    <ClCompile Include="src\ActorSystem\Components\RendererComponent.cpp" />
     <ClCompile Include="src\ActorSystem\Components\TransformComponent.cpp" />
+    <ClCompile Include="src\GameMode.cpp" />
     <ClCompile Include="src\HumbleEngineApp.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Scenes\Scene.cpp" />
@@ -142,9 +144,12 @@
     <ClInclude Include="src\ActorSystem\Actor.h" />
     <ClInclude Include="src\ActorSystem\ActorComponent.h" />
     <ClInclude Include="src\ActorSystem\Components\ColliderComponent.h" />
+    <ClInclude Include="src\ActorSystem\Components\RendererComponent.h" />
     <ClInclude Include="src\ActorSystem\Components\TransformComponent.h" />
+    <ClInclude Include="src\GameMode.h" />
     <ClInclude Include="src\HumbleEngineApp.h" />
     <ClInclude Include="src\Scenes\Scene.h" />
+    <ClInclude Include="src\Singleton.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

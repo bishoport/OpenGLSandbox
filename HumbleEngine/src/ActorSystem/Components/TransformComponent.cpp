@@ -2,7 +2,6 @@
 
 TransformComponent::TransformComponent() : ActorComponent()
 {
-
 }
 
 glm::vec3 TransformComponent::direction()
