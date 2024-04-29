@@ -1,6 +1,6 @@
 #include "Tile.h"
 #include <cstring> // Para std::memcpy
-#include <ShaderManager.h>
+#include <tools/ShaderManager.h>
 #include <input/InputManager.h>
 
 namespace Game
@@ -77,7 +77,7 @@ namespace Game
     void Tile::SetTexture(std::shared_ptr<Texture> newTexture)
     {
         texture = newTexture;
-        texture->Bind();
+        texture->Bind("");
     }
 
     void Tile::Draw()
@@ -87,11 +87,11 @@ namespace Game
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, position);
 
-        libopengl::ShaderManager::Get("base")->use();
+        libCore::ShaderManager::Get("base")->use();
         glActiveTexture(GL_TEXTURE0);
-        libopengl::ShaderManager::Get("base")->setInt("texture1", 0);
-        glBindTexture(GL_TEXTURE_2D, texture->textureID);
-        libopengl::ShaderManager::Get("base")->setMat4("model", model);
+        libCore::ShaderManager::Get("base")->setInt("texture1", 0);
+        glBindTexture(GL_TEXTURE_2D, texture->ID);
+        libCore::ShaderManager::Get("base")->setMat4("model", model);
 
         // Dibuja el quad
         glDrawArrays(GL_TRIANGLES, 0, 6);

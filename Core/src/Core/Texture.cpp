@@ -103,10 +103,11 @@ Texture::Texture(const char* image, const char* texType, GLuint slot)
 //	//glUniform1i(texUni, unit);
 //}
 
-void Texture::Bind()
+void Texture::Bind(const std::string& shader)
 {
 	glActiveTexture(GL_TEXTURE0 + unit);
 	glBindTexture(GL_TEXTURE_2D, ID);
+	libCore::ShaderManager::Get(shader)->setInt("diffuseTexture", unit);
 }
 
 void Texture::Unbind()

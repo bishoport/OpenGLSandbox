@@ -68,7 +68,7 @@ void Practica3::LoopOpenGL(libCore::Timestep deltaTime)
     libCore::ShaderManager::Get("basic")->setMat4("model", glm::mat4(1.0f));
     libCore::ShaderManager::Get("basic")->setInt("diffuseTexture", diffuse1->unit);
     
-    diffuse1->Bind();
+    diffuse1->Bind("basic");
     testMesh1->Draw();
     //---------------------------------------------------------------------------------------------------
 
@@ -83,7 +83,7 @@ void Practica3::LoopOpenGL(libCore::Timestep deltaTime)
     libCore::ShaderManager::Get("basic")->setMat4("model", translatedMatrix);
     libCore::ShaderManager::Get("basic")->setInt("diffuseTexture", diffuse2->unit);
     
-    diffuse2->Bind();
+    diffuse2->Bind("basic");
     testMesh2->Draw();
     //---------------------------------------------------------------------------------------------------
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include <PrimitivesHelper.h>
+#include <tools/PrimitivesHelper.h>
 #include "../Common_Structs.h"
 #include "Sprite3D.h"
 #include <box2d/include/box2d/box2d.h>
@@ -14,7 +14,7 @@ namespace Game
 		Character(const CharacterData& data, b2World* world);
 		~Character();
 
-		void Update(libopengl::Timestep deltaTime) override;
+		void Update(libCore::Timestep deltaTime) override;
 		void Draw() override;
 
 		

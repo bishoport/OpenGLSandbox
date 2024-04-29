@@ -132,6 +132,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\Example_Deferred\ExampleDeferred.cpp" />
     <ClCompile Include="src\Practicas\Practica_0_Template.cpp" />
     <ClCompile Include="src\Practicas\Practica_1_Hello_Triangle.cpp" />
     <ClCompile Include="src\Practicas\Practica_2_Shaders.cpp" />
@@ -139,6 +140,7 @@
     <ClCompile Include="src\ShaderOutline\ShaderOutline.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Example_Deferred\ExampleDeferred.h" />
     <ClInclude Include="src\Practicas\Practica_0_Template.h" />
     <ClInclude Include="src\Practicas\Practica_1_Hello_Triangle.h" />
     <ClInclude Include="src\Practicas\Practica_2_Shaders.h" />
@@ -148,6 +150,11 @@
   <ItemGroup>
     <None Include="assets\shaders\basic.frag" />
     <None Include="assets\shaders\basic.vert" />
+    <None Include="assets\shaders\color_quad_fbo.frag" />
+    <None Include="assets\shaders\deferred\deferred_shading.frag" />
+    <None Include="assets\shaders\deferred\deferred_shading.vert" />
+    <None Include="assets\shaders\depth_quad_fbo.frag" />
+    <None Include="assets\shaders\quad_fbo.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

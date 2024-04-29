@@ -16,7 +16,7 @@ public:
 	//// Assigns a texture unit to a texture
 	//void texUnit(std::string shaderName, GLuint unit);
 	// Binds a texture
-	void Bind();
+	void Bind(const std::string& shader);
 	// Unbinds a texture
 	void Unbind();
 	// Deletes a texture

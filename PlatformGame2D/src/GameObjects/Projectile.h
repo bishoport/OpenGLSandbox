@@ -1,7 +1,6 @@
 #pragma once
 #include "Sprite3D.h"
 #include <box2d/include/box2d/box2d.h>
-#include <MathHelpers.h>
 
 namespace Game 
 {
@@ -11,7 +10,7 @@ namespace Game
         Projectile(b2World* world, const b2Vec2& position, const b2Vec2& velocity, const b2Vec2& direccionInicial);
         virtual ~Projectile(); // Destructor virtual si necesitas limpieza específica
 
-        virtual void Update(libopengl::Timestep deltaTime) override; // Sobrescribir Update si es necesario
+        virtual void Update(libCore::Timestep deltaTime) override; // Sobrescribir Update si es necesario
         virtual void Draw() override; // Sobrescribir Draw si es necesario
 
         bool debeSerDestruido = false; // Flag para marcar si el misil debe ser destruido

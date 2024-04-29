@@ -4,12 +4,19 @@
 #include<glad/glad.h>
 #include<vector>
 
+#define MAX_BONE_INFLUENCE 4
+
 // Structure to standardize the vertices used in the meshes
 struct Vertex
 {
 	glm::vec3 position;
 	glm::vec2 texUV;
 	glm::vec3 normal;
+	glm::vec3 tangent;
+	glm::vec3 bitangent;
+
+	int m_BoneIDs[MAX_BONE_INFLUENCE]; //bone indexes which will influence this vertex
+	float m_Weights[MAX_BONE_INFLUENCE]; //weights from each bone
 };
 
 

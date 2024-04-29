@@ -11,6 +11,9 @@ void ShaderOutline::Init()
 
     if (!ok) return;
 
+    glEnable(GL_STENCIL_TEST); // Habilita el test de stencil
+    glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+
     //-- SHADERS
     std::string shadersDirectory = "C:/Users/pdortegon/Documents/PROPIOS/OpenGLSandbox_V1/OpenGLSandbox/OpenGLSandbox/src/ShaderOutline/shaders/";
     shaderManager.setShaderDataLoad("basic", 

@@ -33,6 +33,9 @@
     <ClCompile Include="src\Practicas\Practica_3_Textures.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Example_Deferred\ExampleDeferred.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Practicas\Practica_0_Template.h">
@@ -50,9 +53,17 @@
     <ClInclude Include="src\Practicas\Practica_3_Textures.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Example_Deferred\ExampleDeferred.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\basic.vert" />
     <None Include="assets\shaders\basic.frag" />
+    <None Include="assets\shaders\quad_fbo.vert" />
+    <None Include="assets\shaders\color_quad_fbo.frag" />
+    <None Include="assets\shaders\depth_quad_fbo.frag" />
+    <None Include="assets\shaders\deferred\deferred_shading.frag" />
+    <None Include="assets\shaders\deferred\deferred_shading.vert" />
   </ItemGroup>
 </Project>

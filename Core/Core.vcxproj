@@ -20,10 +20,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Core\EBO.h" />
+    <ClInclude Include="src\Core\Material.h" />
     <ClInclude Include="src\Core\Mesh.h" />
+    <ClInclude Include="src\Core\Model.h" />
     <ClInclude Include="src\Core\Texture.h" />
     <ClInclude Include="src\Core\VAO.h" />
     <ClInclude Include="src\Core\VBO.h" />
+    <ClInclude Include="src\ECS\ECS.h" />
     <ClInclude Include="src\input\InputManager.h" />
     <ClInclude Include="src\input\KeyCodes.h" />
     <ClInclude Include="src\input\MouseButtonCodes.h" />
@@ -31,7 +34,10 @@
     <ClInclude Include="src\LibCoreHeaders.h" />
     <ClInclude Include="src\Timestep.h" />
     <ClInclude Include="src\tools\Camera.h" />
+    <ClInclude Include="src\tools\FBOManager.h" />
     <ClInclude Include="src\tools\FreeTypeManager.h" />
+    <ClInclude Include="src\tools\GBufferManager.h" />
+    <ClInclude Include="src\tools\ModelLoader.h" />
     <ClInclude Include="src\tools\PrimitivesHelper.h" />
     <ClInclude Include="src\tools\Shader.h" />
     <ClInclude Include="src\tools\ShaderManager.h" />
@@ -50,12 +56,16 @@
   <ItemGroup>
     <ClCompile Include="src\Core\EBO.cpp" />
     <ClCompile Include="src\Core\Mesh.cpp" />
+    <ClCompile Include="src\Core\Model.cpp" />
     <ClCompile Include="src\Core\Texture.cpp" />
     <ClCompile Include="src\Core\VAO.cpp" />
     <ClCompile Include="src\Core\VBO.cpp" />
     <ClCompile Include="src\input\InputManager.cpp" />
     <ClCompile Include="src\LibCore.cpp" />
     <ClCompile Include="src\tools\Camera.cpp" />
+    <ClCompile Include="src\tools\FBOManager.cpp" />
+    <ClCompile Include="src\tools\GBufferManager.cpp" />
+    <ClCompile Include="src\tools\ModelLoader.cpp" />
     <ClCompile Include="src\tools\PrimitivesHelper.cpp" />
     <ClCompile Include="src\tools\ShaderManager.cpp" />
     <ClCompile Include="src\tools\TextureManager.cpp" />
@@ -172,7 +182,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;freetype.lib;</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;freetype.lib;assimp-vc143-mtd.lib;</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(ProjectDir)libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>

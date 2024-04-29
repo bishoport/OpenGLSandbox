@@ -1,7 +1,7 @@
 #include "Character.h"
 #include <input/InputManager.h>
-#include "../ImageLoader.h"
-#include <ShaderManager.h>
+#include "tools/TextureManager.h"
+#include <tools/ShaderManager.h>
 #include "GroundRayCastCallback.h"
 
 namespace Game
@@ -34,9 +34,11 @@ namespace Game
 
         m_body->CreateFixture(&fixtureDef);
 
+        std::string texturesDirectory = "Assets/Sprites/";
+
         animations[CharacterState::Idle] = Animation{
             "Idle",
-            Game::ImageLoader::LoadTexture("C:/Users/pdortegon/Documents/PROPIOS/OpenGL_Playground/OpenGL_Playground/Platform2DGame/Assets/Sprites/idle.png"),
+            libCore::TextureManager::LoadTexture((texturesDirectory + "idle.png").c_str(), "diffuse", 0),
             15, // Supongamos que hay 10 frames
             0, // Frame inicial
             0.1f,//Frame Time
@@ -46,7 +48,7 @@ namespace Game
 
         animations[CharacterState::Run] = Animation{
             "Run",
-             Game::ImageLoader::LoadTexture("C:/Users/pdortegon/Documents/PROPIOS/OpenGL_Playground/OpenGL_Playground/Platform2DGame/Assets/Sprites/run.png"),
+            libCore::TextureManager::LoadTexture((texturesDirectory + "run.png").c_str(), "diffuse", 0),
             15, // Supongamos que hay 8 frames
             0, // Frame inicial
             0.05f,//Frame Time
@@ -54,8 +56,8 @@ namespace Game
             true // Loop
         };
 
-        animations[CharacterState::Idle].texture->Bind();
-        animations[CharacterState::Run].texture->Bind();
+        animations[CharacterState::Idle].texture->Bind("");
+        animations[CharacterState::Run].texture->Bind("");
 
         currentState = CharacterState::Idle;
 
@@ -80,7 +82,7 @@ namespace Game
 
     Character::~Character(){}
 
-    void Character::Update(libopengl::Timestep deltaTime)
+    void Character::Update(libCore::Timestep deltaTime)
     {
         isMoving = false;
 
@@ -242,11 +244,11 @@ namespace Game
 
         // Configuración de la textura y shader
         glActiveTexture(GL_TEXTURE0);
-        libopengl::ShaderManager::Get("base")->use();
-        libopengl::ShaderManager::Get("base")->setInt("texture1", 0);
-        glBindTexture(GL_TEXTURE_2D, anim.texture->textureID);
-        libopengl::ShaderManager::Get("base")->setMat4("model", model);
-        libopengl::ShaderManager::Get("base")->setBool("use_texture", true);
+        libCore::ShaderManager::Get("base")->use();
+        libCore::ShaderManager::Get("base")->setInt("texture1", 0);
+        glBindTexture(GL_TEXTURE_2D, anim.texture->ID);
+        libCore::ShaderManager::Get("base")->setMat4("model", model);
+        libCore::ShaderManager::Get("base")->setBool("use_texture", true);
 
         // Dibujar el quad
         glBindVertexArray(quadVAO);

@@ -1,5 +1,5 @@
 #include "TileQuad.h"
-#include <ShaderManager.h>
+#include <tools/ShaderManager.h>
 #include <input/InputManager.h>
 
 namespace Game
@@ -48,7 +48,7 @@ namespace Game
     }
 
 
-    void TileQuad::Update(libopengl::Timestep deltaTime){}
+    void TileQuad::Update(libCore::Timestep deltaTime){}
 
     void TileQuad::Draw()
     {
@@ -86,11 +86,11 @@ namespace Game
         model = glm::rotate(model, bodyAngle, glm::vec3(0.0f, 0.0f, 1.0f)); // Rota el quad según el ángulo del cuerpo
 
         // Establece la matriz de modelo en tu shader
-        libopengl::ShaderManager::Get("base")->use();
-        libopengl::ShaderManager::Get("base")->setMat4("model", model);
-        libopengl::ShaderManager::Get("base")->setBool("use_texture", false); // Asumiendo que no usas texturas por ahora
+        libCore::ShaderManager::Get("base")->use();
+        libCore::ShaderManager::Get("base")->setMat4("model", model);
+        libCore::ShaderManager::Get("base")->setBool("use_texture", false); // Asumiendo que no usas texturas por ahora
         glm::vec4 myColor = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
-        libopengl::ShaderManager::Get("base")->setVec4("u_Color", myColor);
+        libCore::ShaderManager::Get("base")->setVec4("u_Color", myColor);
 
         glBindVertexArray(quadVAO);
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4); // Dibuja el Quad
@@ -166,10 +166,10 @@ namespace Game
         //model = glm::translate(glm::mat4(1.0f), position);
 
         // Establece la matriz de modelo en tu shader
-        libopengl::ShaderManager::Get("debug")->use();
-        libopengl::ShaderManager::Get("debug")->setMat4("model", model);
+        libCore::ShaderManager::Get("debug")->use();
+        libCore::ShaderManager::Get("debug")->setMat4("model", model);
         glm::vec4 lineColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f); // Color blanco para las líneas
-        libopengl::ShaderManager::Get("debug")->setVec4("u_Color", lineColor);
+        libCore::ShaderManager::Get("debug")->setVec4("u_Color", lineColor);
         
 
         // Dibujar el AABB

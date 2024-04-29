@@ -24,6 +24,7 @@ constexpr Ref<T> CreateRef(Args&& ... args)
 #include <functional>
 #include <iomanip>
 #include <iostream>
+#include <map>
 
 //GLM
 #include <glm/glm.hpp>
@@ -36,12 +37,15 @@ constexpr Ref<T> CreateRef(Args&& ... args)
 #include <glm/gtx/quaternion.hpp>
 
 
-
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 #include "Timestep.h"
 #include "Core/Mesh.h"
+
+//ECS
+#include "ECS/ECS.h"
+
 
 #define M_PI 3.14159265358979323846
 
@@ -59,4 +63,5 @@ namespace libCore
 
 	void SetWindowResizable(bool resizable);
 	void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+
 }

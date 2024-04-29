@@ -1,5 +1,5 @@
 #include "Projectile.h"
-#include <ShaderManager.h>
+#include <tools/ShaderManager.h>
 
 namespace Game 
 {
@@ -43,7 +43,7 @@ namespace Game
 
     }
 
-    void Projectile::Update(libopengl::Timestep deltaTime)
+    void Projectile::Update(libCore::Timestep deltaTime)
     {
         tiempoVida += deltaTime;
         if (tiempoVida >= tiempoVidaMax || debeSerDestruido) {
@@ -100,11 +100,11 @@ namespace Game
         model = glm::rotate(model, bodyAngle, glm::vec3(0.0f, 0.0f, 1.0f)); // Rota el quad según el ángulo del cuerpo
 
         // Establece la matriz de modelo en tu shader
-        libopengl::ShaderManager::Get("base")->use();
-        libopengl::ShaderManager::Get("base")->setMat4("model", model);
-        libopengl::ShaderManager::Get("base")->setBool("use_texture", false); // Asumiendo que no usas texturas por ahora
+        libCore::ShaderManager::Get("base")->use();
+        libCore::ShaderManager::Get("base")->setMat4("model", model);
+        libCore::ShaderManager::Get("base")->setBool("use_texture", false); // Asumiendo que no usas texturas por ahora
         glm::vec4 myColor = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f);
-        libopengl::ShaderManager::Get("base")->setVec4("u_Color", myColor);
+        libCore::ShaderManager::Get("base")->setVec4("u_Color", myColor);
 
         glBindVertexArray(quadVAO);
         glDrawArrays(GL_TRIANGLE_FAN, 0, m_vertices.size() / 3);

@@ -1,9 +1,11 @@
 #pragma once
 
+#include <LibCore.h>
 #include <memory>
 #include "../Common_Structs.h"
 #include "Sprite3D.h"
 #include <box2d/include/box2d/box2d.h>
+
 
 
 namespace Game {
@@ -13,7 +15,7 @@ namespace Game {
         TileQuad();
         ~TileQuad();
 
-        void Update(libopengl::Timestep deltaTime) override;
+        void Update(libCore::Timestep deltaTime) override;
         void Draw() override; // Sobreescribe el método Draw para usar las coordenadas UV y la textura
 
         glm::vec3 centro  = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -37,8 +39,6 @@ namespace Game {
         GLuint lineVAO = 0, lineVBO = 0; // Recursos OpenGL para las líneas de la AABB
         void UpdateAABB(); // Actualiza la AABB y los vértices de la línea
         void DrawAABB(); // Dibuja las líneas de la AABB
-
-        
     };
 }
 

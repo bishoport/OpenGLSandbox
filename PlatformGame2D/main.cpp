@@ -1,8 +1,10 @@
+#define STB_IMAGE_IMPLEMENTATION
+
 #include "src/GameApp.h"
 
 
 int main()
 {
-    GameApp gameApp;
+    Game::GameApp gameApp;
     gameApp.Init();
 }

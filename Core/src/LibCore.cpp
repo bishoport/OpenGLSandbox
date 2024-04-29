@@ -91,8 +91,7 @@ namespace libCore
 		//-------------------------------------------------
 
 		glEnable(GL_DEPTH_TEST); // Habilita el test de profundidad
-		glEnable(GL_STENCIL_TEST); // Habilita el test de stencil
-		glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+		
 
 		//glDepthFunc(GL_LEQUAL);
 		//glDisable(GL_CULL_FACE);

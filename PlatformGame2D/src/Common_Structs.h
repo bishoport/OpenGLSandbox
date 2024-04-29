@@ -1,7 +1,7 @@
 #pragma once
-
+#include <LibCore.h>
 #include <string>
-#include <Headers.h>
+
 
 namespace Game
 {
@@ -14,69 +14,17 @@ namespace Game
 		Dead
 	};
 
-	struct Image {
-		unsigned char* pixels;
-		int width = 0;
-		int height = 0;
-		int channels;
-		std::string path = "NONE";
-	};
-
-
-	struct Texture {
-
-		GLuint textureID = 0;
-
-		std::string typeString;
-		libopengl::Ref<Image> image;
-
-		void Bind() 
-		{
-
-			if (image->pixels == nullptr) {
-				std::cerr << "Image data is null!" << std::endl;
-				return;
-			}
-
-			GLenum format{};
-			if (image->channels == 1)
-				format = GL_RED;
-			else if (image->channels == 3)
-				format = GL_RGB;
-			else if (image->channels == 4)
-				format = GL_RGBA;
-
-
-			glGenTextures(1, &textureID);
-			glBindTexture(GL_TEXTURE_2D, textureID);
-			glTexImage2D(GL_TEXTURE_2D, 0, format, image->width, image->height, 0, format, GL_UNSIGNED_BYTE, image->pixels);
-			glGenerateMipmap(GL_TEXTURE_2D);
-
-			// Set the texture wrapping parameters
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE); // Prevents edge bleeding
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE); // Prevents edge bleeding
-
-			// Set texture filtering parameters
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR); // Use linear filtering for minification
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); // Use linear filtering for magnification
-		}
-	};
-
-
 
 	struct Animation
 	{
 		std::string name = "";
 		//unsigned int texture = 0;
-		libopengl::Ref<Texture> texture;
+		Ref<Texture> texture;
 		int totalFrames = 15; // Cantidad total de frames en tu sprite sheet
 		int currentFrame = 0; // El frame actual que quieres mostrar
 		float frameTime = 0.1f;
 		float frameWidth = 1.0f / totalFrames; // Ancho de cada frame en coordenadas de textura
-		bool loop = true; // Por defecto en loop, cambiar según el estado.
-
-
-		
+		bool loop = true; // Por defecto en loop, cambiar según el estado.	
 	};
 
 
