@@ -37,11 +37,18 @@ void RendererComponent::Tick(float deltaTime)
 
 void RendererComponent::RendererProcess(bool isLightingOnlyBool)
 {
-	libCore::ShaderManager::Get("basic")->use();
+	/*libCore::ShaderManager::Get("basic")->use();
 	libCore::ShaderManager::Get("basic")->setMat4("camMatrix", view());
 	libCore::ShaderManager::Get("basic")->setMat4("model", glm::mat4(1.0f));
 	libCore::ShaderManager::Get("basic")->setInt("diffuseTexture", mainTexture->unit);
 
-	mainTexture->Bind();
-	CurrentMesh->Draw();
+	mainTexture->Bind("basic");
+	CurrentMesh->Draw();*/
+}
+
+void RendererComponent::SetModelInfo(Ref<Mesh> model, Ref<libCore::Shader> shader, Ref<libCore::Camera> camera)
+{
+	CurrentMesh = model;
+	CurrentShader = shader;
+	CurrentCamera = camera;
 }

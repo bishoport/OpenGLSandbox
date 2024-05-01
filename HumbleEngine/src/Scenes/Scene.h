@@ -13,10 +13,12 @@ public:
     Ref<Mesh> testMesh1;
     Ref<Mesh> testMesh2;
 
+    libCore::ShaderManager shaderManager;
+    Ref<libCore::Camera> camera;
 
-	void SetUp();
+	void SetUp(Ref<libCore::Camera> newCamera);
 
-	void QuickActor(Ref<Actor> actor, Ref<Mesh> model, Ref<Texture> texture, libCore::Shader shader, libCore::Camera* camera,
+	void QuickActor(Ref<Actor> actor, Ref<Mesh> model, Ref<Texture> texture, Ref<libCore::Shader>  shader,
         glm::vec3 position = glm::vec3(0, 0, 0),
         glm::vec3 scale = glm::vec3(1, 1, 1), glm::vec3 color = glm::vec3(1, 1, 1),
         bool isColliderAdded = false);

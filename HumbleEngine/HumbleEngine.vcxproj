@@ -105,6 +105,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)..\Core\vendor\imgui;$(ProjectDir)..\Core\vendor\freetype-2.13.2\include;$(ProjectDir)..\Core\vendor;$(ProjectDir)..\Core\src;$(ProjectDir)..\Core\vendor\stb_image\stb_image.h;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

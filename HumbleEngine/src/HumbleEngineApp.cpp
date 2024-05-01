@@ -14,14 +14,12 @@ void HumbleEngineApp::Init()
 
     currentScene = std::make_shared<Scene>();
 
-    std::string shadersDirectory = "C:/Users/migue/Desktop/Projects/OpenGLSandbox/HumbleEngine/assets/shaders/";
-    shaderManager.setShaderDataLoad("basic", shadersDirectory + "basic.vert", shadersDirectory + "basic.frag");
-    shaderManager.setShaderDataLoad("text", shadersDirectory + "text.vert", shadersDirectory + "text.frag");
-    shaderManager.LoadAllShaders();
-
     freeTypeManager = new libCore::FreeTypeManager();
-    currentScene->SetUp();
     m_camera = new libCore::Camera(800, 600, glm::vec3(0.0f, 0.0f, 5.0f));
+    Ref<libCore::Camera> newCamera = std::make_shared<libCore::Camera>(*m_camera);
+    currentScene->SetUp(newCamera);
+    currentScene->Init();
+
     libCore::InitializeMainLoop();
 
 
@@ -29,6 +27,7 @@ void HumbleEngineApp::Init()
 
 void HumbleEngineApp::LoopOpenGL(libCore::Timestep deltaTime)
 {
+
     // Update CAMERA
     m_camera->Inputs(deltaTime);
     m_camera->updateMatrix(45.0f, 0.1f, 100.0f);
@@ -42,7 +41,8 @@ void HumbleEngineApp::LoopOpenGL(libCore::Timestep deltaTime)
     glStencilMask(0xFF);               // Habilita la escritura al buffer de stencil
 
     // --Draw first MODEL 
- 
+    currentScene->Tick(deltaTime.GetMilliseconds());
+
     //---------------------------------------------------------------------------------------------------
 
 

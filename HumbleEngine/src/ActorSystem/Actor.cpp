@@ -32,6 +32,8 @@ ActorComponent& Actor::AddComponent(Ref<ActorComponent> Component)
 	return *newComponent;
 }
 
+
+
 void Actor::Initialize(std::string Name, unsigned number)
 {
 	if (Name.length() <= 0) {
@@ -51,27 +53,36 @@ void Actor::PostRenderer()
 {
 }
 
+void Actor::Begin()
+{
+	for (int i = 0; i < ComponentList.size(); i++) 
+		ComponentList[i]->Begin();
+	
+}
+
+
+
 void Actor::Tick(float deltaTime)
 {
+	for (int i = 0; i < ComponentList.size(); i++)
+		ComponentList[i]->Tick(deltaTime);
 }
 
 void Actor::OnColliderEnter(ColliderComponent* other)
 {
 }
 
-
-template<typename T>
-inline T& Actor::GetComponent()
+void Actor::ListComponents()
 {
 	for (int i = 0; i < ComponentList.size(); i++) {
-		Ref<ActorComponent> actorComp = ComponentList[i];
-		if (dynamic_cast<T*>(actorComp) != nullptr) {
-			return *dynamic_cast<T*>(ComponentList[i]);
-		}
+		const std::type_info& type = typeid(*ComponentList[i]);
+		std::cout << ComponentList[i] << " " << type.name() << std::endl;
 	}
-	throw std::runtime_error("Component of type T not found");
-	// TODO: Insertar una instrucción "return" aquí
+
 }
+
+
+
 
 template<typename T>
 bool Actor::ComponentExist()
@@ -84,3 +95,6 @@ bool Actor::ComponentExist()
 	}
 	return false;
 }
+
+
+

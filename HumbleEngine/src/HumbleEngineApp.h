@@ -16,7 +16,6 @@ public:
 private:
   
     Ref<Scene> currentScene;
-    libCore::ShaderManager shaderManager;
     libCore::FreeTypeManager* freeTypeManager = nullptr;
     libCore::Camera* m_camera = nullptr;
 

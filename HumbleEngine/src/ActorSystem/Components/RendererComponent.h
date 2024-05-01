@@ -3,6 +3,7 @@
 #include <LibCore.h>
 #include "TransformComponent.h"
 #include <tools/Camera.h>
+#include <Core/Model.h>
 
 class RendererComponent : public ActorComponent {
 public:
@@ -26,4 +27,6 @@ public:
 	void Tick(float deltaTime) override;
 
 	void RendererProcess(bool isLightingOnlyBool);
+
+	void SetModelInfo(Ref<Mesh> model, Ref<libCore::Shader> shader, Ref<libCore::Camera> camera);
 };
