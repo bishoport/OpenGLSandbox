@@ -14,7 +14,7 @@ public:
 	void Init();
 
 private:
-  
+    libCore::ShaderManager shaderManager;
     Ref<Scene> currentScene;
     libCore::FreeTypeManager* freeTypeManager = nullptr;
     libCore::Camera* m_camera = nullptr;
@@ -24,5 +24,8 @@ private:
     void LoopOpenGL(libCore::Timestep deltaTime);
     void OnCloseOpenGL();
     void LoopImGUI();
+
+    Ref<Texture> diffuse1;
+    Ref<libCore::Camera> newCamera;
 
 };

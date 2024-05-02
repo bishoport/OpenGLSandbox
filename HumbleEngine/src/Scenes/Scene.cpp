@@ -37,7 +37,7 @@ void Scene::QuickActor(Ref<Actor> actor, Ref<Mesh> model, Ref<Texture> texture, 
 	if (smartPointer != nullptr)
 		std::cout << "New Actor available " << smartPointer->ActorName << std::endl;
 	actor->ListComponents();
-	actor->GetComponent<RendererComponent>()->SetModelInfo(model, shader, camera);
+	actor->GetComponent<RendererComponent>()->SetModelInfo(model, shader, camera, texture);
 	actor->GetComponent<TransformComponent>()->Ping("Funciona Transform");
 	
 	//actor->GetComponent<RendererComponent>().SetModelInfo(model, shader, nullptr);

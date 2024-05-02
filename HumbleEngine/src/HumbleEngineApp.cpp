@@ -11,17 +11,19 @@ void HumbleEngineApp::Init()
         std::bind(&HumbleEngineApp::LoopImGUI, this));
     if (!ok) return;
     //---------------------
-
+    std::string shadersDirectory = "C:/Users/migue/Desktop/Projects/OpenGLSandbox/HumbleEngine/assets/shaders/";
+    shaderManager.setShaderDataLoad("basic", shadersDirectory + "basic.vert", shadersDirectory + "basic.frag");
+  //  shaderManager.setShaderDataLoad("text", shadersDirectory + "text.vert", shadersDirectory + "text.frag");
+    shaderManager.LoadAllShaders();
     currentScene = std::make_shared<Scene>();
 
     freeTypeManager = new libCore::FreeTypeManager();
     m_camera = new libCore::Camera(800, 600, glm::vec3(0.0f, 0.0f, 5.0f));
-    Ref<libCore::Camera> newCamera = std::make_shared<libCore::Camera>(*m_camera);
+    newCamera = std::shared_ptr<libCore::Camera>(m_camera);
     currentScene->SetUp(newCamera);
     currentScene->Init();
 
     libCore::InitializeMainLoop();
-
 
 }
 

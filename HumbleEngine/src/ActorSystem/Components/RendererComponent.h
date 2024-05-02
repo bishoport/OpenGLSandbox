@@ -28,5 +28,8 @@ public:
 
 	void RendererProcess(bool isLightingOnlyBool);
 
-	void SetModelInfo(Ref<Mesh> model, Ref<libCore::Shader> shader, Ref<libCore::Camera> camera);
+	void SetModelInfo(Ref<Mesh> model, Ref<libCore::Shader> shader, Ref<libCore::Camera> camera, Ref<Texture> texture);
+
+private:
+
 };

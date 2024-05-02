@@ -33,22 +33,27 @@ void RendererComponent::Begin()
 
 void RendererComponent::Tick(float deltaTime)
 {
+	RendererProcess(false);
 }
 
 void RendererComponent::RendererProcess(bool isLightingOnlyBool)
 {
-	/*libCore::ShaderManager::Get("basic")->use();
+	glm::mat4 identityMatrix = glm::mat4(1.0f);// La matriz de identidad
+   glm::vec3 position(2.0f, 0.0f, -10.0f);// La posición a la que quieres trasladar la matriz 
+   glm::mat4 translatedMatrix = glm::translate(identityMatrix, position);// Crear una nueva matriz con la traslación aplicada
+	libCore::ShaderManager::Get("basic")->use();
 	libCore::ShaderManager::Get("basic")->setMat4("camMatrix", view());
 	libCore::ShaderManager::Get("basic")->setMat4("model", glm::mat4(1.0f));
+	glActiveTexture(GL_TEXTURE0 + mainTexture->unit);
+	glBindTexture(GL_TEXTURE_2D, mainTexture->ID);
 	libCore::ShaderManager::Get("basic")->setInt("diffuseTexture", mainTexture->unit);
-
-	mainTexture->Bind("basic");
-	CurrentMesh->Draw();*/
+	CurrentMesh->Draw();
 }
 
-void RendererComponent::SetModelInfo(Ref<Mesh> model, Ref<libCore::Shader> shader, Ref<libCore::Camera> camera)
+void RendererComponent::SetModelInfo(Ref<Mesh> model, Ref<libCore::Shader> shader, Ref<libCore::Camera> camera, Ref<Texture> texture)
 {
 	CurrentMesh = model;
 	CurrentShader = shader;
 	CurrentCamera = camera;
+	mainTexture = texture;
 }
