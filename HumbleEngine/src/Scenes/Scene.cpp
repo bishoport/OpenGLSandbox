@@ -4,7 +4,6 @@
 void Scene::SetUp(Ref<libCore::Camera> newCamera)
 {
 	camera = newCamera;
-	gameMode = std::make_shared<GameMode>();
 
 	testMesh1 = libCore::PrimitivesHelper::CreateCube();
 	testMesh2 = libCore::PrimitivesHelper::CreateSphere(1.0, 20, 20);
@@ -29,7 +28,7 @@ void Scene::SetUp(Ref<libCore::Camera> newCamera)
 
 void Scene::QuickActor(Ref<Actor> actor, Ref<Mesh> model, Ref<Texture> texture, Ref<libCore::Shader> shader, glm::vec3 position, glm::vec3 scale, glm::vec3 color, bool isColliderAdded)
 {
-	Ref<RendererComponent> newRenderer = std::make_shared<RendererComponent>();
+	Ref<RendererComponent> newRenderer = std::make_shared<RendererComponent>(actor->GetComponent<TransformComponent>());
 	actor->AddComponent(newRenderer);
 	Actor* newActor = dynamic_cast<Actor*>(Ref<Actor>(actor).get());
 	Ref<Actor> smartPointer = std::make_shared<Actor>(*newActor);
@@ -41,21 +40,19 @@ void Scene::QuickActor(Ref<Actor> actor, Ref<Mesh> model, Ref<Texture> texture, 
 	actor->GetComponent<TransformComponent>()->Ping("Funciona Transform");
 	
 	//actor->GetComponent<RendererComponent>().SetModelInfo(model, shader, nullptr);
-	gameMode->scenesActors.emplace_back(actor);
-	
+	GameMode::GetInstance().scenesActors.emplace_back(actor);	
 }
 
 void Scene::Init()
 {
-	gameMode->BeginPlay();
+	GameMode::GetInstance().BeginPlay();
 }
 
 void Scene::Tick(float deltaTime)
 {
-	gameMode->PreRenderer();
-	gameMode->PostRenderer();
-
-	gameMode->Tick(deltaTime);
+	GameMode::GetInstance().PreRenderer();
+	GameMode::GetInstance().PostRenderer();
+	GameMode::GetInstance().Tick(deltaTime);
 }
 
 

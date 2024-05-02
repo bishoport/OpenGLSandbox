@@ -1,9 +1,8 @@
 #include "RendererComponent.h"
 
-RendererComponent::RendererComponent() : ActorComponent()
+RendererComponent::RendererComponent(Ref<TransformComponent> newTransform) : ActorComponent()
 {
-//	CurrentCamera = std::make_shared<libCore::Camera>();
-
+	Transform = newTransform;
 }
 
 glm::mat4 RendererComponent::projection()
@@ -29,6 +28,7 @@ glm::mat4 RendererComponent::model()
 
 void RendererComponent::Begin()
 {
+
 }
 
 void RendererComponent::Tick(float deltaTime)
@@ -43,7 +43,7 @@ void RendererComponent::RendererProcess(bool isLightingOnlyBool)
    glm::mat4 translatedMatrix = glm::translate(identityMatrix, position);// Crear una nueva matriz con la traslación aplicada
 	libCore::ShaderManager::Get("basic")->use();
 	libCore::ShaderManager::Get("basic")->setMat4("camMatrix", view());
-	libCore::ShaderManager::Get("basic")->setMat4("model", glm::mat4(1.0f));
+	libCore::ShaderManager::Get("basic")->setMat4("model", model());
 	glActiveTexture(GL_TEXTURE0 + mainTexture->unit);
 	glBindTexture(GL_TEXTURE_2D, mainTexture->ID);
 	libCore::ShaderManager::Get("basic")->setInt("diffuseTexture", mainTexture->unit);

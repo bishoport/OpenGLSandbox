@@ -15,7 +15,10 @@ void HumbleEngineApp::Init()
     shaderManager.setShaderDataLoad("basic", shadersDirectory + "basic.vert", shadersDirectory + "basic.frag");
   //  shaderManager.setShaderDataLoad("text", shadersDirectory + "text.vert", shadersDirectory + "text.frag");
     shaderManager.LoadAllShaders();
+    imguiEditor->Init();
     currentScene = std::make_shared<Scene>();
+
+    imguiEditor = std::make_shared<IMGUIEditor>();
 
     freeTypeManager = new libCore::FreeTypeManager();
     m_camera = new libCore::Camera(800, 600, glm::vec3(0.0f, 0.0f, 5.0f));
@@ -69,7 +72,6 @@ void HumbleEngineApp::OnCloseOpenGL()
 
 void HumbleEngineApp::LoopImGUI()
 {
-    ImGui::Begin("Prueba");
+    imguiEditor->LoadLayouts();
 
-    ImGui::End();
 }

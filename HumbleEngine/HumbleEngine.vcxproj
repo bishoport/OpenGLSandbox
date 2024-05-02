@@ -138,6 +138,7 @@
     <ClCompile Include="src\ActorSystem\Components\TransformComponent.cpp" />
     <ClCompile Include="src\GameMode.cpp" />
     <ClCompile Include="src\HumbleEngineApp.cpp" />
+    <ClCompile Include="src\ImGUIEditor.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Scenes\Scene.cpp" />
   </ItemGroup>
@@ -149,6 +150,7 @@
     <ClInclude Include="src\ActorSystem\Components\TransformComponent.h" />
     <ClInclude Include="src\GameMode.h" />
     <ClInclude Include="src\HumbleEngineApp.h" />
+    <ClInclude Include="src\ImGUIEditor.h" />
     <ClInclude Include="src\Scenes\Scene.h" />
     <ClInclude Include="src\Singleton.h" />
   </ItemGroup>

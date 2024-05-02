@@ -29,6 +29,7 @@ ActorComponent& Actor::AddComponent(Ref<ActorComponent> Component)
 		return *Component;
 	}
 	Ref<ActorComponent> newComponent = *iterador;
+	newComponent->owner = this;
 	return *newComponent;
 }
 
@@ -84,17 +85,7 @@ void Actor::ListComponents()
 
 
 
-template<typename T>
-bool Actor::ComponentExist()
-{
-	for (int i = 0; i < ComponentList.size(); i++) {
-		Ref<ActorComponent> actorComp = ComponentList[i];
-		if (dynamic_cast<T*>(actorComp) != nullptr)
-			return true;
 
-	}
-	return false;
-}
 
 
 

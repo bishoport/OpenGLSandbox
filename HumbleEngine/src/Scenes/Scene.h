@@ -23,7 +23,6 @@ public:
         glm::vec3 scale = glm::vec3(1, 1, 1), glm::vec3 color = glm::vec3(1, 1, 1),
         bool isColliderAdded = false);
 
-    Ref<GameMode> gameMode;
 
     void Init();
 

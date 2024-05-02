@@ -2,6 +2,10 @@
 
 TransformComponent::TransformComponent() : ActorComponent()
 {
+	SetPosition(glm::vec3(0));
+	SetScale(glm::vec3(1));
+	SetRotation(glm::vec3(0));
+
 }
 
 glm::vec3 TransformComponent::direction()

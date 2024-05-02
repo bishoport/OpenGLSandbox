@@ -4,7 +4,7 @@ class Actor;
 class ActorComponent {
 public:
 	int IDActor;
-	Actor* actor;
+	Actor* owner;
 	virtual void Begin() = 0;
 
 

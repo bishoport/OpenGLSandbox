@@ -14,7 +14,7 @@ public:
 	Ref<libCore::Camera> CurrentCamera;
 	Ref<TransformComponent> Transform;
 
-	RendererComponent();
+	RendererComponent(Ref<TransformComponent> newTransform);
 
 	glm::mat4 projection();
 

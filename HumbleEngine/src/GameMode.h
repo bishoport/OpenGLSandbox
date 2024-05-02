@@ -1,7 +1,8 @@
 #pragma once
 #include <vector>
 #include "ActorSystem/Actor.h"
-class GameMode {
+#include "Singleton.h"
+class GameMode : public Singleton<GameMode>{
 
 public:
 
@@ -14,5 +15,6 @@ public:
 	virtual void Tick(float DeltaTime);
 
 	virtual void PostRenderer();
+
 
  };

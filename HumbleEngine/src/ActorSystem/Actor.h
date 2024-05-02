@@ -8,7 +8,7 @@
 class Actor {
 public:
 	std::string ActorName;
-	Actor* parent;
+	Ref<Actor> parent;
 	unsigned ActorID;
 	
 
@@ -32,7 +32,18 @@ public:
 	}
 
 	
-	template<typename T> bool ComponentExist();
+	template<typename T>
+	bool ComponentExist()
+	{
+		for (int i = 0; i < ComponentList.size(); i++) {
+			Ref<ActorComponent> actorComp = ComponentList[i];
+			if (std::dynamic_pointer_cast<T>(actorComp) != nullptr)
+				return true;
+
+		}
+		return false;
+	}
+
 	template<typename T> void TryGetComponent()
 	{
 		std::cout << "Try Get Component " << std::endl;
