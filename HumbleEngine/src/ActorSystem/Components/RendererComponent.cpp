@@ -1,3 +1,4 @@
+#include "../../CollisionsManager.h"
 #include "RendererComponent.h"
 
 RendererComponent::RendererComponent(Ref<TransformComponent> newTransform) : ActorComponent()
@@ -48,6 +49,8 @@ void RendererComponent::RendererProcess(bool isLightingOnlyBool)
 	glBindTexture(GL_TEXTURE_2D, mainTexture->ID);
 	libCore::ShaderManager::Get("basic")->setInt("diffuseTexture", mainTexture->unit);
 	CurrentMesh->Draw();
+
+	RenderBoundingBox(model());
 }
 
 void RendererComponent::SetModelInfo(Ref<Mesh> model, Ref<libCore::Shader> shader, Ref<libCore::Camera> camera, Ref<Texture> texture)
@@ -56,4 +59,35 @@ void RendererComponent::SetModelInfo(Ref<Mesh> model, Ref<libCore::Shader> shade
 	CurrentShader = shader;
 	CurrentCamera = camera;
 	mainTexture = texture;
+}
+
+void RendererComponent::RenderBoundingBox(glm::mat4 model)
+{
+
+	if (CurrentMesh == nullptr) return;
+
+	glm::vec3 boundingBoxMin = glm::vec3(std::numeric_limits<float>::max(), std::numeric_limits<float>::max(), std::numeric_limits<float>::max());
+	glm::vec3 boundingBoxMax = glm::vec3(-std::numeric_limits<float>::max(), -std::numeric_limits<float>::max(), -std::numeric_limits<float>::max());
+
+	//Bounding Box
+	for (unsigned int i = 0; i < CurrentMesh->vertices.size() - 1; i += 1)
+	{
+		std::cout << "Vertices " << i << " " << CurrentMesh->vertices.size() << std::endl;
+			// Get the coordinates of the current vertex
+			GLfloat x = CurrentMesh->vertices[i].position.x;
+			GLfloat y = CurrentMesh->vertices[i].position.y;
+			GLfloat z = CurrentMesh->vertices[i].position.z;
+			glm::vec4 vertex = model * glm::vec4(x, y, z, 1.f);
+			// Update the minimum and maximum values of the bounding box
+			boundingBoxMin.x = std::min(boundingBoxMin.x, vertex.x);
+			boundingBoxMin.y = std::min(boundingBoxMin.y, vertex.y);
+			boundingBoxMin.z = std::min(boundingBoxMin.z, vertex.z);
+
+			boundingBoxMax.x = std::max(boundingBoxMax.x, vertex.x);
+			boundingBoxMax.y = std::max(boundingBoxMax.y, vertex.y);
+			boundingBoxMax.z = std::max(boundingBoxMax.z, vertex.z);
+		
+	}
+
+	CollisionsManager::GetInstance().AddMaxMinBounds(owner, boundingBoxMax, boundingBoxMin);
 }

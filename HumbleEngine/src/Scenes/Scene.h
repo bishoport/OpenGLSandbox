@@ -4,8 +4,11 @@
 #include <tools/PrimitivesHelper.h>
 #include <tools/TextureManager.h>
 #include "../GameMode.h"
+#include "../CollisionsManager.h"
 class Scene {
 public:
+
+    
 
     Ref<Texture> diffuse1;
     Ref<Texture> diffuse2;
@@ -20,7 +23,7 @@ public:
 
 	void QuickActor(Ref<Actor> actor, Ref<Mesh> model, Ref<Texture> texture, Ref<libCore::Shader>  shader,
         glm::vec3 position = glm::vec3(0, 0, 0),
-        glm::vec3 scale = glm::vec3(1, 1, 1), glm::vec3 color = glm::vec3(1, 1, 1),
+        glm::vec3 scale = glm::vec3(1, 1, 1), glm::vec3 rotation = glm::vec3(0), glm::vec3 color = glm::vec3(1, 1, 1),
         bool isColliderAdded = false);
 
 

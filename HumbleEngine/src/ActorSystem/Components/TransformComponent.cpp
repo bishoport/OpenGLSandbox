@@ -15,6 +15,13 @@ glm::vec3 TransformComponent::direction()
 	return glm::normalize(direction);
 }
 
+void TransformComponent::InitialConfiguration(glm::vec3 pos, glm::vec3 rot, glm::vec3 scale)
+{
+	SetPosition(pos);
+	SetScale(scale);
+	SetRotation(rot);
+}
+
 void TransformComponent::SetScale(glm::vec3 newScale)
 {
 	scale = newScale;

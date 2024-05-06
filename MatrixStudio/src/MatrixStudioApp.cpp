@@ -20,7 +20,7 @@ void MatrixStudio::Init()
 
 
     //-- SHADERS
-    std::string shadersDirectory = "C:/Users/pdortegon/Documents/PROPIOS/OpenGLSandbox_V1/MatrixStudio/assets/shaders/";
+    std::string shadersDirectory = "C:/Users/migue/Desktop/Projects/OpenGLSandbox/MatrixStudio/assets/shaders/";
     shaderManager.setShaderDataLoad("basic", shadersDirectory + "basic.vert", shadersDirectory + "basic.frag");
     shaderManager.setShaderDataLoad("text" , shadersDirectory + "text.vert" , shadersDirectory + "text.frag");
     shaderManager.LoadAllShaders();

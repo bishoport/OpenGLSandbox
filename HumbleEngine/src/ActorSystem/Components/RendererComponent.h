@@ -30,6 +30,9 @@ public:
 
 	void SetModelInfo(Ref<Mesh> model, Ref<libCore::Shader> shader, Ref<libCore::Camera> camera, Ref<Texture> texture);
 
+	void RenderBoundingBox(glm::mat4 model);
+
+
 private:
 
 };

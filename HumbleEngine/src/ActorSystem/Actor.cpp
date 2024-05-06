@@ -69,8 +69,9 @@ void Actor::Tick(float deltaTime)
 		ComponentList[i]->Tick(deltaTime);
 }
 
-void Actor::OnColliderEnter(ColliderComponent* other)
+void Actor::OnColliderEnter(Ref<ColliderComponent> other)
 {
+	std::cout << "Cubic detection " << std::endl;
 }
 
 void Actor::ListComponents()

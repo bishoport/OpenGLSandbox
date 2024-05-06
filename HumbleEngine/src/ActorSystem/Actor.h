@@ -62,7 +62,7 @@ public:
 
 	virtual void Tick(float deltaTime);
 
-	virtual void OnColliderEnter(ColliderComponent* other);
+	virtual void OnColliderEnter(Ref<ColliderComponent> other);
 
 	void ListComponents();
 

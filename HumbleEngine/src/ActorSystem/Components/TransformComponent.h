@@ -12,6 +12,8 @@ public:
 
 	glm::vec3 direction();
 
+	void InitialConfiguration(glm::vec3 pos, glm::vec3 rot, glm::vec3 scale);
+
 	void SetScale(glm::vec3 newScale);
 	void SetPosition(glm::vec3 newPos);
 
