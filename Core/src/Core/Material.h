@@ -4,21 +4,24 @@
 #include <string>
 #include "Texture.h"
 
-class Material
+namespace libCore
 {
-public:
-    std::string materialName = "none";
+    class Material
+    {
+    public:
+        std::string materialName = "none";
 
-    std::string shaderName = "default";
+        std::string shaderName = "default";
 
-    //VALUES
-    glm::vec3 color = glm::vec3(1.0f, 1.0f, 1.0f);
+        //VALUES
+        glm::vec3 color = glm::vec3(1.0f, 1.0f, 1.0f);
 
-    //TEXTURES
-    Ref<Texture> albedoMap;
-    Ref<Texture> normalMap;
-    Ref<Texture> metallicMap;
-    Ref<Texture> rougnessMap;
-    Ref<Texture> aOMap;
-    //-------------------------------------------------------
-};
+        //TEXTURES
+        Ref<Texture> albedoMap;
+        Ref<Texture> normalMap;
+        Ref<Texture> metallicMap;
+        Ref<Texture> rougnessMap;
+        Ref<Texture> aOMap;
+        //-------------------------------------------------------
+    };
+}

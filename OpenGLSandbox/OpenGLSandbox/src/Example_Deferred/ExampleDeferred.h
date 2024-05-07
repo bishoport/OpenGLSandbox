@@ -7,6 +7,7 @@
 #include <tools/ModelLoader.h>
 #include <tools/FBOManager.h>
 #include <tools/GBufferManager.h>
+#include <Core/skeletal/animator.h>
 
 class ExampleDeferred
 {
@@ -31,28 +32,16 @@ private:
     void LoopImGUI();
     void OnCloseOpenGL();
 
+    void LoadModelInScene(libCore::ImportModelData importModelData);
 
-    Ref<Texture> diffuse1;
-    Ref <libCore::ModelContainer> m_modelRobot;
+    std::vector<Ref<libCore::ModelContainer>> modelsInScene;
 
-    Ref<Texture> diffuse2;
-    Ref<Texture> diffuse3;
 
-    Ref<Mesh> testMesh1;
-    Ref<Mesh> testMesh2;
+    float focusDepth = 1.0f;
+    float blurRadius = 0.019f;
+    float blurAmount  = 0.302f;
+    int   blurSampleCount = 10;
 
-    //G-Buffer
-    unsigned int gBuffer;
-    unsigned int gPosition, gNormal, gAlbedoSpec;
-    unsigned int attachments[3] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2 };
-    unsigned int rboDepth;
 
-    // lighting info
-    // -------------
-    const unsigned int NR_LIGHTS = 32;
-    std::vector<glm::vec3> lightPositions;
-    std::vector<glm::vec3> lightColors;
-
-    float focusDepth = 0.0f;
-    float blurRadius = 0.0f;
+    libCore::Animator* animator = nullptr;
 };

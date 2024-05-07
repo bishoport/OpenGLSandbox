@@ -23,6 +23,10 @@
     <ClInclude Include="src\Core\Material.h" />
     <ClInclude Include="src\Core\Mesh.h" />
     <ClInclude Include="src\Core\Model.h" />
+    <ClInclude Include="src\Core\skeletal\animation.h" />
+    <ClInclude Include="src\Core\skeletal\animator.h" />
+    <ClInclude Include="src\Core\skeletal\AnimData.h" />
+    <ClInclude Include="src\Core\skeletal\bone.h" />
     <ClInclude Include="src\Core\Texture.h" />
     <ClInclude Include="src\Core\VAO.h" />
     <ClInclude Include="src\Core\VBO.h" />
@@ -33,6 +37,8 @@
     <ClInclude Include="src\LibCore.h" />
     <ClInclude Include="src\LibCoreHeaders.h" />
     <ClInclude Include="src\Timestep.h" />
+    <ClInclude Include="src\tools\AssetsManager.h" />
+    <ClInclude Include="src\tools\AssimpGlmHelpers.h" />
     <ClInclude Include="src\tools\Camera.h" />
     <ClInclude Include="src\tools\FBOManager.h" />
     <ClInclude Include="src\tools\FreeTypeManager.h" />
@@ -41,6 +47,7 @@
     <ClInclude Include="src\tools\PrimitivesHelper.h" />
     <ClInclude Include="src\tools\Shader.h" />
     <ClInclude Include="src\tools\ShaderManager.h" />
+    <ClInclude Include="src\tools\SkeletalModelLoader.h" />
     <ClInclude Include="src\tools\TextureManager.h" />
     <ClInclude Include="vendor\ft\ft2build.h" />
     <ClInclude Include="vendor\imgui\imconfig.h" />
@@ -62,12 +69,14 @@
     <ClCompile Include="src\Core\VBO.cpp" />
     <ClCompile Include="src\input\InputManager.cpp" />
     <ClCompile Include="src\LibCore.cpp" />
+    <ClCompile Include="src\tools\AssetsManager.cpp" />
     <ClCompile Include="src\tools\Camera.cpp" />
     <ClCompile Include="src\tools\FBOManager.cpp" />
     <ClCompile Include="src\tools\GBufferManager.cpp" />
     <ClCompile Include="src\tools\ModelLoader.cpp" />
     <ClCompile Include="src\tools\PrimitivesHelper.cpp" />
     <ClCompile Include="src\tools\ShaderManager.cpp" />
+    <ClCompile Include="src\tools\SkeletalModelLoader.cpp" />
     <ClCompile Include="src\tools\TextureManager.cpp" />
     <ClCompile Include="vendor\glad\glad.c" />
     <ClCompile Include="vendor\imgui\imgui.cpp" />

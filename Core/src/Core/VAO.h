@@ -11,24 +11,26 @@
 //vértices por sí mismo, sino que mantiene referencias a los VBOs y EBOs que sí lo hacen.
 //---------------------------------------------------------------------------------------------------------------
 
-class VAO
+namespace libCore
 {
-public:
-	// ID reference for the Vertex Array Object
-	GLuint ID;
-	// Constructor that generates a VAO ID
-	VAO();
+	class VAO
+	{
+	public:
+		// ID reference for the Vertex Array Object
+		GLuint ID;
+		// Constructor that generates a VAO ID
+		VAO();
 
-	// Links a VBO Attribute such as a position or color to the VAO
-	void LinkAttrib(VBO& VBO, GLuint layout, GLuint numComponents, GLenum type, GLsizeiptr stride, void* offset);
-	// Binds the VAO
-	void Bind();
-	// Unbinds the VAO
-	void Unbind();
-	// Deletes the VAO
-	void Delete();
-};
-
+		// Links a VBO Attribute such as a position or color to the VAO
+		void LinkAttrib(VBO& VBO, GLuint layout, GLuint numComponents, GLenum type, GLsizeiptr stride, void* offset);
+		// Binds the VAO
+		void Bind();
+		// Unbinds the VAO
+		void Unbind();
+		// Deletes the VAO
+		void Delete();
+	};
+}
 
 
 //--La relación de trabajo entre estos objetos es la siguiente :

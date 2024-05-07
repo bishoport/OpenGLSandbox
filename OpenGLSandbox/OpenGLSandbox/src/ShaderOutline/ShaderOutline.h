@@ -25,5 +25,5 @@ private:
 
     float outlineValue = 0.0300006699f;
 
-    Ref<Mesh> testMesh;
+    Ref<libCore::Mesh> testMesh;
 };

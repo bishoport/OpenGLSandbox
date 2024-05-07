@@ -65,5 +65,7 @@
     <None Include="assets\shaders\depth_quad_fbo.frag" />
     <None Include="assets\shaders\deferred\deferred_shading.frag" />
     <None Include="assets\shaders\deferred\deferred_shading.vert" />
+    <None Include="assets\shaders\basic_skeletal.frag" />
+    <None Include="assets\shaders\basic_skeletal.vert" />
   </ItemGroup>
 </Project>

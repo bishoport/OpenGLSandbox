@@ -16,6 +16,7 @@ namespace libCore
 	bool running = false;
 	bool useImGUI = false;
 
+
 	void SetupInputCallbacks()
 	{
 		glfwSetKeyCallback(window, [](GLFWwindow* window, int key, int scancode, int action, int mods) {
@@ -127,6 +128,10 @@ namespace libCore
 		// -------------------------------------------------
 
 		InputManager::Instance().subscribe();
+
+		// --Assets Manager & load Default Assets
+		assetsManager.LoadDefaultAssets();
+
 
 		return true;
 	}

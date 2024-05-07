@@ -3,10 +3,13 @@
 #include <tools/TextureManager.h>
 #include <tools/ModelLoader.h>
 
+#include <Core/skeletal/animation.h>
+#include <tools/SkeletalModelLoader.h>
+
 
 void ExampleDeferred::Init()
 {
-    //--SETUP OPENGL & CALLBACKS
+    // -- SETUP OPENGL & CALLBACKS
     bool ok = libCore::InitializeEngine("Deferred Example", screenWidth, screenHeight,
         std::bind(&ExampleDeferred::LoopOpenGL, this, std::placeholders::_1),
         std::bind(&ExampleDeferred::OnCloseOpenGL, this),
@@ -14,41 +17,72 @@ void ExampleDeferred::Init()
     if (!ok) return;
     //-----------------------------------------------------------------
 
-    //--OPENGL FLAGS
+    // -- OPENGL FLAGS
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
-    // -----------------------------
+    //-----------------------------
 
-    //--SHADERS
+    // -- SHADERS
     std::string shadersDirectory = "assets/shaders/";
-    shaderManager.setShaderDataLoad("basic",        shadersDirectory + "basic.vert",    shadersDirectory + "basic.frag");
-    shaderManager.setShaderDataLoad("colorQuadFBO", shadersDirectory + "quad_fbo.vert", shadersDirectory + "color_quad_fbo.frag");
-    shaderManager.setShaderDataLoad("depthQuadFBO", shadersDirectory + "quad_fbo.vert", shadersDirectory + "depth_quad_fbo.frag");
+    shaderManager.setShaderDataLoad("basic",         shadersDirectory + "basic.vert",         shadersDirectory + "basic.frag");
+    //shaderManager.setShaderDataLoad("basic_skeletal",shadersDirectory + "basic_skeletal.vert",shadersDirectory + "basic_skeletal.frag");
+    shaderManager.setShaderDataLoad("colorQuadFBO",  shadersDirectory + "quad_fbo.vert",      shadersDirectory + "color_quad_fbo.frag");
+    shaderManager.setShaderDataLoad("depthQuadFBO",  shadersDirectory + "quad_fbo.vert",      shadersDirectory + "depth_quad_fbo.frag");
     shaderManager.LoadAllShaders();
     //-----------------------------------------------------------------
 
-    //-- PREPARE GEOMETRY
-    libCore::ImportModelData importModelData;
-    importModelData.filePath = "assets/models/Robot/";
-    importModelData.fileName = "Robot.fbx";
-    importModelData.invertUV = false;
-    importModelData.rotate90 = false;
-    importModelData.modelID = 0;
-    m_modelRobot = libCore::ModelLoader::LoadModel(importModelData);
+
+    // -- PREPARE GEOMETRY
+    //libCore::ImportModelData importModelData2;
+    //importModelData2.filePath = "assets/models/vampire/";
+    //importModelData2.fileName = "dancing_vampire.dae";
+    //importModelData2.invertUV = false;
+    //importModelData2.rotate90 = false;
+    //importModelData2.skeletal = true;
+    //importModelData2.useCustomTransform = false;
+    //importModelData2.modelID = 1;
+    //importModelData2.globalScaleFactor = 1.0f;
+    //LoadModelInScene(importModelData2);
+
+
+    libCore::ImportModelData importModelData1;
+    importModelData1.filePath = "assets/models/varios/";
+    importModelData1.fileName = "aj.dae";
+    importModelData1.invertUV = false;
+    importModelData1.rotate90 = false;
+    importModelData1.skeletal = true;
+    importModelData1.useCustomTransform = false;
+    importModelData1.modelID = 1;
+    importModelData1.globalScaleFactor = 1.0f;
+    LoadModelInScene(importModelData1);
+
+
+
+    //libCore::ImportModelData importModelData;
+    //importModelData.filePath = "assets/models/Robot/";
+    //importModelData.fileName = "Robot.fbx";
+    //importModelData.invertUV = false;
+    //importModelData.rotate90 = false;
+    //importModelData.skeletal = false;
+    //importModelData.modelID = 0;
+    //importModelData.globalScaleFactor = 1.0f;
+    //LoadModelInScene(importModelData);
+
+    //libCore::ImportModelData importModelData;
+    //importModelData.filePath = "assets/models/Castle/";
+    //importModelData.fileName = "sponza.obj";
+    //importModelData.invertUV = false;
+    //importModelData.rotate90 = false;
+    //importModelData.useCustomTransform = true;
+    //importModelData.modelID = 1;
+    //importModelData.globalScaleFactor = 0.1f;
+    //LoadModelInScene(importModelData);
+
+    
     //-----------------------------------------------------------------
 
-    //-- PREPARE GEOMETRY
-    testMesh1 = libCore::PrimitivesHelper::CreateCube();
-    testMesh2 = libCore::PrimitivesHelper::CreateSphere(1.0, 20, 20);
-    //-----------------------------------------------------------------
 
-    //-- PREPARE TEXTURES
-    std::string texturesDirectory = "assets/textures/";
-    diffuse2 = libCore::TextureManager::LoadTexture((texturesDirectory + "floor_1.jpg").c_str(), "diffuse", 0);
-    diffuse3 = libCore::TextureManager::LoadTexture((texturesDirectory + "floor_2.jpg").c_str(), "diffuse", 0);
-    //-----------------------------------------------------------------
-
-    //-- CAMERA
+    // -- CAMERA
     m_camera = new libCore::Camera(screenWidth, screenHeight, glm::vec3(0.0f, 0.0f, 5.0f));
     //-----------------------------------------------------------------
 
@@ -57,16 +91,16 @@ void ExampleDeferred::Init()
     fboManager->init(screenWidth, screenHeight);
     //------------------------------------------------------------------
 
-    // -- GBuffer
-    //gBufferManager = CreateScope<libCore::GBufferManager>();
-    //gBufferManager->init(screenWidth, screenHeight);
-    //------------------------------------------------------------------
-    
+    libCore::Animation danceAnimation("assets/models/varios/jump.dae", modelsInScene[0]->UnifyMeshes());
+    animator = new libCore::Animator(&danceAnimation);
 
-    //-- START LOOP OpenGL
+
+    // -- START LOOP OpenGL
     libCore::InitializeMainLoop();
     //------------------------------------------------------------------
 }
+
+
 
 void ExampleDeferred::LoopOpenGL(libCore::Timestep deltaTime)
 {
@@ -76,22 +110,61 @@ void ExampleDeferred::LoopOpenGL(libCore::Timestep deltaTime)
     
     fboManager->bindFBO();
 
+
+    animator->UpdateAnimation(deltaTime);
+
+
+
     glEnable(GL_DEPTH_TEST); // enable depth testing (is disabled for rendering screen-space quad)
 
     // Clear
-    glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+    glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+    
     //-- Normal Draw
     libCore::ShaderManager::Get("basic")->use();
     libCore::ShaderManager::Get("basic")->setMat4("camMatrix", m_camera->cameraMatrix);
-    m_modelRobot->Draw("basic");
+
+    for (auto& modelContainer : modelsInScene) {
+
+        libCore::ShaderManager::Get("basic")->setBool("use_skeletal", modelContainer->skeletal);
+
+        if (modelContainer->skeletal == true)
+        {
+            auto transforms = animator->GetFinalBoneMatrices();
+            for (int i = 0; i < transforms.size(); ++i)
+                libCore::ShaderManager::Get("basic")->setMat4("finalBonesMatrices[" + std::to_string(i) + "]", transforms[i]);
+        }
+
+        modelContainer->Draw("basic");
+    }
     //---------------------------
+
+
+    //-- Skeletal Draw
+    //libCore::ShaderManager::Get("basic_skeletal")->use();
+    //libCore::ShaderManager::Get("basic_skeletal")->setMat4("camMatrix", m_camera->cameraMatrix);
+    //
+    //auto transforms = animator->GetFinalBoneMatrices();
+    //
+    //for (int i = 0; i < transforms.size(); ++i)
+    //    libCore::ShaderManager::Get("basic_skeletal")->setMat4("finalBonesMatrices[" + std::to_string(i) + "]", transforms[i]);
+    //
+    //for (auto& modelContainer : modelsInScene) {
+    //    if (modelContainer->skeletal == true)
+    //        modelContainer->Draw("basic_skeletal");
+    //}
+    //---------------------------
+
+
+    
+
 
     fboManager->unbindFBO();   
     glDisable(GL_DEPTH_TEST);
 
-    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+    glClearColor(0.0f, 1.0f, 1.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
 
@@ -99,8 +172,12 @@ void ExampleDeferred::LoopOpenGL(libCore::Timestep deltaTime)
    libCore::ShaderManager::Get("colorQuadFBO")->use();
    libCore::ShaderManager::Get("colorQuadFBO")->setInt("screenTexture", 0);
    libCore::ShaderManager::Get("colorQuadFBO")->setInt("depthTexture" , 1);
+
    libCore::ShaderManager::Get("colorQuadFBO")->setFloat("focusDepth" , focusDepth);
    libCore::ShaderManager::Get("colorQuadFBO")->setFloat("blurRadius" , blurRadius);
+   libCore::ShaderManager::Get("colorQuadFBO")->setFloat("blurAmount" , blurAmount);
+   libCore::ShaderManager::Get("colorQuadFBO")->setInt("sampleCount"  , blurSampleCount);
+
    fboManager->bindTexture("color",0);
    fboManager->bindTexture("depth",1);
    fboManager->drawFBO("color");
@@ -119,16 +196,48 @@ void ExampleDeferred::LoopImGUI()
     // Crear una ventana ImGui y un panel
     ImGui::Begin("Float Values Control Panel"); // Comienza una ventana nueva
 
-    // Slider para el primer valor float
-    ImGui::SliderFloat("focusDepth", &focusDepth, 0.0f, 2.0f, "Value 1: %.3f");
-
-    // Slider para el segundo valor float
-    ImGui::SliderFloat("blurRadius", &blurRadius, 0.0f, 1.0f, "Value 2: %.3f");
+    ImGui::SliderFloat("focusDepth", &focusDepth, 0.0f, 1.0f, "%.3f");
+    ImGui::SliderFloat("blurRadius", &blurRadius, 0.0f, 1.0f, "%.3f");
+    ImGui::SliderFloat("blurAmount", &blurAmount, 0.0f, 1.0f, "%.3f");
+    ImGui::SliderInt("Sample Count", &blurSampleCount, 1, 20); // Puedes ajustar los valores mínimos y máximos según lo necesario
 
     ImGui::End(); // Finaliza la ventana
+
+
+    ImGui::Begin("Hierarchy");
+
+    for (auto& modelContainer : modelsInScene) {
+
+        if (ImGui::TreeNode(modelContainer.get(), "Model: %s", modelContainer->name.c_str())) {
+            for (int j = 0; j < modelContainer->models.size(); j++) {
+                if (ImGui::TreeNode(modelContainer->models[j].get(), "Child: %d", j)) {
+                    // Aquí listamos las Meshes de cada Model
+                    auto& model = modelContainer->models[j];
+                    for (int k = 0; k < model->meshes.size(); k++) {
+                        ImGui::BulletText("Mesh: %s", model->meshes[k]->meshName.c_str());
+                        ImGui::BulletText("Transform:");
+                        ImGui::DragFloat3("Position", &model->transform.position[0], 0.1f);
+                        ImGui::DragFloat3("Rotation", &model->transform.rotation[0], 0.01f, -3.14159f, 3.14159f, "%.3f rad");
+                        ImGui::DragFloat3("Scale", &model->transform.scale[0], 0.1f, 0.01f, 100.0f, "%.3f");
+                    }
+                    ImGui::TreePop(); // Finaliza el nodo del Model
+                }
+            }
+            ImGui::TreePop(); // Finaliza el nodo del ModelContainer
+        }
+    }
+    
+
+    ImGui::End();
 }
 
 void ExampleDeferred::OnCloseOpenGL()
 {
+}
+
+void ExampleDeferred::LoadModelInScene(libCore::ImportModelData importModelData)
+{
+    modelsInScene.push_back(libCore::ModelLoader::LoadModel(importModelData));
+    //modelsInScene.push_back(libCore::SkeletalModelLoader::LoadModel(importModelData));
 }
 

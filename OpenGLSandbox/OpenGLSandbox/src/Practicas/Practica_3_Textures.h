@@ -23,9 +23,9 @@ private:
     void LoopOpenGL(libCore::Timestep deltaTime);
     void OnCloseOpenGL();
 
-    Ref<Texture> diffuse1;
-    Ref<Texture> diffuse2;
+    Ref<libCore::Texture> diffuse1;
+    Ref<libCore::Texture> diffuse2;
 
-    Ref<Mesh> testMesh1;
-    Ref<Mesh> testMesh2;
+    Ref<libCore::Mesh> testMesh1;
+    Ref<libCore::Mesh> testMesh2;
 };

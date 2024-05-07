@@ -35,7 +35,7 @@ void ShaderOutline::Init()
 
     //-- PREPARE TEXTURES
     std::string texturesDirectory = "C:/Users/pdortegon/Documents/PROPIOS/OpenGLSandbox_V1/OpenGLSandbox/OpenGLSandbox/assets/textures/";
-    Texture diffuse = Texture((texturesDirectory + "floor_1.jpg").c_str(), "diffuse", 0);
+    libCore::Texture diffuse = libCore::Texture((texturesDirectory + "floor_1.jpg").c_str(), "diffuse", 0);
     //-----------------------------------------------------------------
 
     //-- CAMERA

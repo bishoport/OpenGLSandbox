@@ -45,6 +45,7 @@ constexpr Ref<T> CreateRef(Args&& ... args)
 
 //ECS
 #include "ECS/ECS.h"
+#include "tools/AssetsManager.h"
 
 
 #define M_PI 3.14159265358979323846
@@ -64,4 +65,7 @@ namespace libCore
 	void SetWindowResizable(bool resizable);
 	void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
+
+	// Obtener la instancia del manager
+	
 }
