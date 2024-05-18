@@ -27,7 +27,7 @@ namespace Game
         Tile();
         void SetupTile();
         void SetPosition(float x, float y); // Define la posición del tile
-        void SetTexture(std::shared_ptr<Texture> texture); // Asocia una textura con el tile
+        void SetTexture(std::shared_ptr<libCore::Texture> texture); // Asocia una textura con el tile
 
         void Draw(); // Sobreescribe el método Draw para usar las coordenadas UV y la textura
 
@@ -37,7 +37,7 @@ namespace Game
 
     private:
         float uvCoords[8]; // Almacenar las coordenadas UV para este tile
-        std::shared_ptr<Texture> texture; // Textura asociada al tile
+        std::shared_ptr<libCore::Texture> texture; // Textura asociada al tile
         GLuint VAO, VBO;
     };
 }

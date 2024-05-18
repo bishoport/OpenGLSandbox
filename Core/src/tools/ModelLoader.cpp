@@ -12,7 +12,7 @@ namespace libCore
         Assimp::Importer importer;
         std::string completePath = importOptions.filePath + importOptions.fileName;
 
-        unsigned int flags = aiProcess_Triangulate;
+        unsigned int flags  = aiProcess_Triangulate;
                      flags |= aiProcess_CalcTangentSpace;
                      flags |= aiProcess_GenSmoothNormals;
                      flags |= aiProcess_ValidateDataStructure;
@@ -23,7 +23,8 @@ namespace libCore
         const aiScene* scene = importer.ReadFile(completePath, flags);
         if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
             std::cerr << "ERROR::ASSIMP::" << importer.GetErrorString() << std::endl;
-            throw std::runtime_error("Failed to load model");
+            //throw std::runtime_error("Failed to load model");
+            return modelContainer;
         }
 
         aiMatrix4x4 nodeTransform = scene->mRootNode->mTransformation;

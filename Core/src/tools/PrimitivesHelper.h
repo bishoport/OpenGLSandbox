@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../LibCoreHeaders.h"
+#include "../Core/Mesh.h"
 
 namespace libCore 
 {

@@ -1,8 +1,9 @@
 #pragma once
 
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
+#include "../LibCoreHeaders.h"
+#include "../src/Core/EngineOpenGL.h"
 #include "../Timestep.h"
+#include "../input/InputManager.h"
 
 namespace libCore
 {

@@ -25,9 +25,9 @@ void ExampleDeferred::Init()
     // -- SHADERS
     std::string shadersDirectory = "assets/shaders/";
     shaderManager.setShaderDataLoad("basic",         shadersDirectory + "basic.vert",         shadersDirectory + "basic.frag");
-    //shaderManager.setShaderDataLoad("basic_skeletal",shadersDirectory + "basic_skeletal.vert",shadersDirectory + "basic_skeletal.frag");
-    shaderManager.setShaderDataLoad("colorQuadFBO",  shadersDirectory + "quad_fbo.vert",      shadersDirectory + "color_quad_fbo.frag");
     shaderManager.setShaderDataLoad("depthQuadFBO",  shadersDirectory + "quad_fbo.vert",      shadersDirectory + "depth_quad_fbo.frag");
+    shaderManager.setShaderDataLoad("colorQuadFBO",  shadersDirectory + "quad_fbo.vert",      shadersDirectory + "color_quad_fbo.frag");
+    
     shaderManager.LoadAllShaders();
     //-----------------------------------------------------------------
 
@@ -86,10 +86,12 @@ void ExampleDeferred::Init()
     m_camera = new libCore::Camera(screenWidth, screenHeight, glm::vec3(0.0f, 0.0f, 5.0f));
     //-----------------------------------------------------------------
 
-    // -- FRAME BUFFER
+
+    // -- FRAME BUFFER MANAGER
     fboManager = CreateScope<libCore::FBOManager>();
     fboManager->init(screenWidth, screenHeight);
     //------------------------------------------------------------------
+
 
     libCore::Animation danceAnimation("assets/models/varios/jump.dae", modelsInScene[0]->UnifyMeshes());
     animator = new libCore::Animator(&danceAnimation);
@@ -108,14 +110,13 @@ void ExampleDeferred::LoopOpenGL(libCore::Timestep deltaTime)
     m_camera->Inputs(deltaTime);
     m_camera->updateMatrix(45.0f, 0.1f, 1000.0f);
     
-    fboManager->bindFBO();
-
-
+    
     animator->UpdateAnimation(deltaTime);
 
 
-
+  
     glEnable(GL_DEPTH_TEST); // enable depth testing (is disabled for rendering screen-space quad)
+    fboManager->bindFBO();
 
     // Clear
     glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
@@ -136,34 +137,13 @@ void ExampleDeferred::LoopOpenGL(libCore::Timestep deltaTime)
             for (int i = 0; i < transforms.size(); ++i)
                 libCore::ShaderManager::Get("basic")->setMat4("finalBonesMatrices[" + std::to_string(i) + "]", transforms[i]);
         }
-
         modelContainer->Draw("basic");
     }
     //---------------------------
 
 
-    //-- Skeletal Draw
-    //libCore::ShaderManager::Get("basic_skeletal")->use();
-    //libCore::ShaderManager::Get("basic_skeletal")->setMat4("camMatrix", m_camera->cameraMatrix);
-    //
-    //auto transforms = animator->GetFinalBoneMatrices();
-    //
-    //for (int i = 0; i < transforms.size(); ++i)
-    //    libCore::ShaderManager::Get("basic_skeletal")->setMat4("finalBonesMatrices[" + std::to_string(i) + "]", transforms[i]);
-    //
-    //for (auto& modelContainer : modelsInScene) {
-    //    if (modelContainer->skeletal == true)
-    //        modelContainer->Draw("basic_skeletal");
-    //}
-    //---------------------------
-
-
-    
-
-
-    fboManager->unbindFBO();   
+    fboManager->unbindFBO(); 
     glDisable(GL_DEPTH_TEST);
-
     glClearColor(0.0f, 1.0f, 1.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
@@ -172,7 +152,6 @@ void ExampleDeferred::LoopOpenGL(libCore::Timestep deltaTime)
    libCore::ShaderManager::Get("colorQuadFBO")->use();
    libCore::ShaderManager::Get("colorQuadFBO")->setInt("screenTexture", 0);
    libCore::ShaderManager::Get("colorQuadFBO")->setInt("depthTexture" , 1);
-
    libCore::ShaderManager::Get("colorQuadFBO")->setFloat("focusDepth" , focusDepth);
    libCore::ShaderManager::Get("colorQuadFBO")->setFloat("blurRadius" , blurRadius);
    libCore::ShaderManager::Get("colorQuadFBO")->setFloat("blurAmount" , blurAmount);
@@ -180,6 +159,7 @@ void ExampleDeferred::LoopOpenGL(libCore::Timestep deltaTime)
 
    fboManager->bindTexture("color",0);
    fboManager->bindTexture("depth",1);
+
    fboManager->drawFBO("color");
 
 

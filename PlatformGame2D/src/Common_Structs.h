@@ -19,7 +19,7 @@ namespace Game
 	{
 		std::string name = "";
 		//unsigned int texture = 0;
-		Ref<Texture> texture;
+		Ref<libCore::Texture> texture;
 		int totalFrames = 15; // Cantidad total de frames en tu sprite sheet
 		int currentFrame = 0; // El frame actual que quieres mostrar
 		float frameTime = 0.1f;

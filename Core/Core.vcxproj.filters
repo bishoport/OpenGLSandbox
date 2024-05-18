@@ -108,7 +108,7 @@
     <ClInclude Include="src\ECS\ECS.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\tools\FBOManager.h">
+    <ClInclude Include="src\Core\FBO.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\tools\GBufferManager.h">
@@ -135,11 +135,17 @@
     <ClInclude Include="src\tools\SkeletalModelLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Core\GuiLayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tools\EventManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\EngineOpenGL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\LibCore.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\input\InputManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -200,9 +206,6 @@
     <ClCompile Include="src\tools\ModelLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\tools\FBOManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\tools\GBufferManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -210,6 +213,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\tools\SkeletalModelLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\GuiLayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\EngineOpenGL.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

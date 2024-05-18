@@ -1,7 +1,7 @@
 #include "Camera.h"
 
-#include "../LibCore.cpp"
-#include "../input/InputManager.h"
+
+
 
 namespace libCore
 {
@@ -42,12 +42,12 @@ namespace libCore
 		if (InputManager::Instance().IsMouseButtonDown(GLFW_MOUSE_BUTTON_RIGHT))
 		{
 			// Hides mouse cursor
-			glfwSetInputMode(libCore::window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+			glfwSetInputMode(libCore::EngineOpenGL::GetWindow(), GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 
 			// Prevents camera from jumping on the first click
 			if (firstClick)
 			{
-				glfwSetCursorPos(window, (width / 2), (height / 2));
+				glfwSetCursorPos(libCore::EngineOpenGL::GetWindow(), (width / 2), (height / 2));
 				firstClick = false;
 			}
 
@@ -55,7 +55,7 @@ namespace libCore
 			double mouseX;
 			double mouseY;
 			// Fetches the coordinates of the cursor
-			glfwGetCursorPos(window, &mouseX, &mouseY);
+			glfwGetCursorPos(libCore::EngineOpenGL::GetWindow(), &mouseX, &mouseY);
 
 			// Normalizes and shifts the coordinates of the cursor such that they begin in the middle of the screen
 			// and then "transforms" them into degrees 
@@ -75,14 +75,15 @@ namespace libCore
 			Orientation = glm::rotate(Orientation, glm::radians(-rotY), Up);
 
 			// Sets mouse cursor to the middle of the screen so that it doesn't end up roaming around
-			glfwSetCursorPos(window, (width / 2), (height / 2));
+			glfwSetCursorPos(libCore::EngineOpenGL::GetWindow(), (width / 2), (height / 2));
 		}
 		else
 		{
 			// Unhides cursor since camera is not looking around anymore
-			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+			glfwSetInputMode(libCore::EngineOpenGL::GetWindow(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 			// Makes sure the next time the camera looks around it doesn't jump
 			firstClick = true;
 		}
 	}
+
 }

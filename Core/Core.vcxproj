@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Core\EBO.h" />
+    <ClInclude Include="src\Core\EngineOpenGL.h" />
     <ClInclude Include="src\Core\Material.h" />
     <ClInclude Include="src\Core\Mesh.h" />
     <ClInclude Include="src\Core\Model.h" />
@@ -31,6 +32,7 @@
     <ClInclude Include="src\Core\VAO.h" />
     <ClInclude Include="src\Core\VBO.h" />
     <ClInclude Include="src\ECS\ECS.h" />
+    <ClInclude Include="src\Core\GuiLayer.h" />
     <ClInclude Include="src\input\InputManager.h" />
     <ClInclude Include="src\input\KeyCodes.h" />
     <ClInclude Include="src\input\MouseButtonCodes.h" />
@@ -40,7 +42,8 @@
     <ClInclude Include="src\tools\AssetsManager.h" />
     <ClInclude Include="src\tools\AssimpGlmHelpers.h" />
     <ClInclude Include="src\tools\Camera.h" />
-    <ClInclude Include="src\tools\FBOManager.h" />
+    <ClInclude Include="src\Core\FBO.hpp" />
+    <ClInclude Include="src\tools\EventManager.h" />
     <ClInclude Include="src\tools\FreeTypeManager.h" />
     <ClInclude Include="src\tools\GBufferManager.h" />
     <ClInclude Include="src\tools\ModelLoader.h" />
@@ -62,16 +65,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\EBO.cpp" />
+    <ClCompile Include="src\Core\EngineOpenGL.cpp" />
     <ClCompile Include="src\Core\Mesh.cpp" />
     <ClCompile Include="src\Core\Model.cpp" />
     <ClCompile Include="src\Core\Texture.cpp" />
     <ClCompile Include="src\Core\VAO.cpp" />
     <ClCompile Include="src\Core\VBO.cpp" />
+    <ClCompile Include="src\Core\GuiLayer.cpp" />
     <ClCompile Include="src\input\InputManager.cpp" />
-    <ClCompile Include="src\LibCore.cpp" />
     <ClCompile Include="src\tools\AssetsManager.cpp" />
     <ClCompile Include="src\tools\Camera.cpp" />
-    <ClCompile Include="src\tools\FBOManager.cpp" />
     <ClCompile Include="src\tools\GBufferManager.cpp" />
     <ClCompile Include="src\tools\ModelLoader.cpp" />
     <ClCompile Include="src\tools\PrimitivesHelper.cpp" />
