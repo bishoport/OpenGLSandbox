@@ -50,6 +50,9 @@ namespace libCore
 		Viewport(const std::string& name) :viewportName(name), viewportSize(0, 0), viewportPos(0, 0), previousViewportSize(0, 0), previousViewportPos(0, 0), mouseInviewport(false) {}
 	};
 
+
+
+
     class GuiLayer {
 
     public:

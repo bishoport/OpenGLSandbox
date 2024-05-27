@@ -4,6 +4,7 @@
 
 namespace libCore
 {
+
     Ref<ModelContainer> ModelLoader::LoadModel(ImportModelData importOptions)
     {
         auto modelContainer = CreateRef<ModelContainer>();
@@ -35,6 +36,8 @@ namespace libCore
         return modelContainer;
     }
 
+
+    //------------------------------------STANDARD MODELS
     void ModelLoader::processNode(aiNode* node, const aiScene* scene, Ref<ModelContainer> modelContainer, aiMatrix4x4 _nodeTransform, ImportModelData importOptions)
     {
         glm::mat4 glmNodeTransform = aiMatrix4x4ToGlm(_nodeTransform);
@@ -70,9 +73,6 @@ namespace libCore
             ModelLoader::processNode(node->mChildren[i], scene, modelContainer, finalTransform, importOptions); // Asegúrate de pasar `finalTransform`
         }
     }
-    
-
-
     void ModelLoader::processMesh(aiMesh* mesh, const aiScene* scene, Ref<Model> modelBuild, aiMatrix4x4 finalTransform, ImportModelData importOptions, int meshIndex)
     {
         auto meshBuild = CreateRef<Mesh>();
@@ -205,8 +205,9 @@ namespace libCore
     {
         auto material = CreateRef<Material>();
 
+
         //COLOR DIFUSSE
-        aiColor3D color(0.f, 0.f, 0.f);
+        aiColor3D color(1.f, 1.f, 1.f);
         const aiMaterial* mat = scene->mMaterials[mesh->mMaterialIndex];
         mat->Get(AI_MATKEY_COLOR_DIFFUSE, color);
 
@@ -216,10 +217,10 @@ namespace libCore
         material->color.g = color.g;
         material->color.b = color.b;
 
+
         // Agregamos la carga de la textura ALBEDO aquí
         aiString texturePath;
-        
-        
+
         if (mat->GetTexture(aiTextureType_DIFFUSE, 0, &texturePath) == AI_SUCCESS)
         {
             std::string completePathTexture = importOptions.filePath + texturePath.C_Str();
@@ -244,10 +245,8 @@ namespace libCore
 
         modelBuild->materials.push_back(material);
     }
-
-    
-
-
+    //-----------------------------------------------------------------------
+ 
     //------------------------------------SKELETAL MODELS
     void ModelLoader::processSkeletalMesh(aiMesh* mesh, const aiScene* scene, Ref<Model> modelBuild, aiMatrix4x4 finalTransform, ImportModelData importOptions, int meshIndex)
     {
@@ -346,7 +345,6 @@ namespace libCore
 
         meshBuild->SetupMesh();
     }
-
     void ModelLoader::SetVertexBoneDataToDefault(Vertex& vertex)
     {
         for (int i = 0; i < MAX_BONE_INFLUENCE; i++)
@@ -438,7 +436,7 @@ namespace libCore
     //-----------------------------------------------------------------------
 
 
-    //TOOLS
+    //-------------------------------------TOOLS
     glm::mat4 ModelLoader::aiMatrix4x4ToGlm(const aiMatrix4x4& from)
     {
         glm::mat4 to;
@@ -463,4 +461,5 @@ namespace libCore
 
         return to;
     }
+    //-----------------------------------------------------------------------
 }

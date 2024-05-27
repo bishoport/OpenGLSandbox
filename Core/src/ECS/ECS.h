@@ -1,8 +1,5 @@
 #pragma once
 
-//#include <glm/glm.hpp>
-//#include <glm/gtc/matrix_transform.hpp>
-
 namespace libCore
 {
     struct Transform {
@@ -12,8 +9,8 @@ namespace libCore
 
         Transform()
             : position(0.0f, 0.0f, 0.0f),
-            rotation(0.0f, 0.0f, 0.0f),
-            scale(1.0f, 1.0f, 1.0f) {}
+              rotation(0.0f, 0.0f, 0.0f),
+              scale(1.0f, 1.0f, 1.0f) {}
 
         glm::mat4 getMatrix() const {
             glm::mat4 mat = glm::mat4(1.0f);

@@ -95,16 +95,6 @@ namespace libCore
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
-	//void Texture::texUnit(std::string shaderName, GLuint unit)
-	//{
-	//	//// Gets the location of the uniform
-	//	//GLuint texUni = glGetUniformLocation(shader.ID, uniform);
-	//	//// Shader needs to be activated before changing the value of a uniform
-	//	//shader.Activate();
-	//	//// Sets the value of the uniform
-	//	//glUniform1i(texUni, unit);
-	//}
-
 	void Texture::Bind(const std::string& shader)
 	{
 		glActiveTexture(GL_TEXTURE0 + unit);

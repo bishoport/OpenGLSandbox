@@ -26,6 +26,7 @@ namespace libCore
         auto& GetBoneInfoMap() { return m_BoneInfoMap; }
         int& GetBoneCount() { return m_BoneCounter; }
 
+        //--METHODS
         void Draw(const std::string& shader);
     };
 }
