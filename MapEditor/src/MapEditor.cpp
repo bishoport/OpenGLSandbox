@@ -1,5 +1,7 @@
 #include "MapEditor.h"
 #include <Core/EngineOpenGL.h>
+#include "ECS/System/RenderSystem.h"
+#include "ECS/Components/RendererComponent.hpp"
 
 
 void MapEditor::Init()
@@ -23,20 +25,15 @@ void MapEditor::Init()
     shaderManager.setShaderDataLoad("colorQuadFBO", shadersDirectory + "quad_fbo.vert", shadersDirectory + "color_quad_fbo.frag");
     shaderManager.LoadAllShaders();
     //-----------------------------------------------------------------
-
-
-    // -- PREPARE GEOMETRY
-    libCore::ImportModelData importModelData;
-    importModelData.filePath = "assets/models/Robot/";
-    importModelData.fileName = "Robot.fbx";
-    importModelData.invertUV = false;
-    importModelData.rotate90 = false;
-    importModelData.useCustomTransform = true;
-    importModelData.modelID = 1;
-    importModelData.globalScaleFactor = 1.0f;
-    LoadModelInScene(importModelData);
+    
+    defaultScene = new BaseScene();
+    defaultScene->BeginPlay();
+  
     //-----------------------------------------------------------------
-
+    for (unsigned i = 0; i < defaultScene->entitiesList.size(); i++) {
+        LoadModelInScene(defaultScene->ModelData(defaultScene->entitiesList[i]));
+    }
+   
 
     // -- VIEWPORTS
     libCore::EngineOpenGL::GetInstance().CreateViewport("VIEWPORT_1", glm::vec3(0.0f, 0.0f, 1.0f));
@@ -54,7 +51,8 @@ void MapEditor::Init()
 void MapEditor::LoopOpenGL(libCore::Timestep deltaTime)
 {
     glEnable(GL_DEPTH_TEST); // enable depth testing (is disabled for rendering screen-space quad)
-    
+    defaultScene->Tick(deltaTime);
+
     //--------------------------------------------------------------------------------------------------------
     libCore::EngineOpenGL::GetInstance().RenderViewports(modelsInScene);
     //--------------------------------------------------------------------------------------------------------
