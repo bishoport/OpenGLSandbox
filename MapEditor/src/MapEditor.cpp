@@ -1,7 +1,6 @@
 #include "MapEditor.h"
 #include <Core/EngineOpenGL.h>
-#include "ECS/System/RenderSystem.h"
-#include "ECS/Components/RendererComponent.hpp"
+
 
 
 void MapEditor::Init()
@@ -26,13 +25,16 @@ void MapEditor::Init()
     shaderManager.LoadAllShaders();
     //-----------------------------------------------------------------
     
-    defaultScene = new BaseScene();
-    defaultScene->BeginPlay();
+    /*scene = new Scene();
+    scene->BeginPlay();*/
   
-    //-----------------------------------------------------------------
-    for (unsigned i = 0; i < defaultScene->entitiesList.size(); i++) {
-        LoadModelInScene(defaultScene->ModelData(defaultScene->entitiesList[i]));
-    }
+    //auto view = EntityManager::GetInstance().m_registry.view<entt::entity>();
+    ////-----------------------------------------------------------------
+    //for (auto entity : view) {
+    //    
+    //   // LoadModelInScene(scene->ModelData(entity));
+    //}
+    
    
 
     // -- VIEWPORTS
@@ -51,7 +53,7 @@ void MapEditor::Init()
 void MapEditor::LoopOpenGL(libCore::Timestep deltaTime)
 {
     glEnable(GL_DEPTH_TEST); // enable depth testing (is disabled for rendering screen-space quad)
-    defaultScene->Tick(deltaTime);
+   // scene->Tick(deltaTime);
 
     //--------------------------------------------------------------------------------------------------------
     libCore::EngineOpenGL::GetInstance().RenderViewports(modelsInScene);

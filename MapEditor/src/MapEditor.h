@@ -1,10 +1,8 @@
 #pragma once
+
 #include <tools/ModelLoader.h>
 #include <Timestep.h>
-#include "Singleton.h"
-#include "Levels/BaseScene.h"
-
-class MapEditor : public Singleton<MapEditor>
+class MapEditor
 {
 public:
     MapEditor() = default;
@@ -34,7 +32,7 @@ private:
     float blurAmount = 0.302f;
     int   blurSampleCount = 10;
 
-    BaseScene * defaultScene;
+   // Scene* scene;
 
 public:
     void LoadModelInScene(libCore::ImportModelData importModelData);

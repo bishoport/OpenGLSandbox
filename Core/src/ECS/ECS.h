@@ -1,5 +1,6 @@
 #pragma once
-
+#include <entt.hpp>
+#include "../LibCoreHeaders.h"
 namespace libCore
 {
     struct Transform {
@@ -22,4 +23,23 @@ namespace libCore
             return mat;
         }
     };
+
+    
+
+
 }
+   
+    //struct MeshComponent {
+    //    //VAO, VBO 
+    //    std::vector<Ref<Mesh>> meshes;
+    //};
+
+    //struct MaterialComponent {
+    //    std::vector<Ref<Material>> materials;
+    //    // BaseColor
+    //    // Specular
+    //    //Metallic
+    //    //Roughness
+    //    //AmbientOcclusion
+    //};
+
